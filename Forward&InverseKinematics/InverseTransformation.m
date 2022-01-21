@@ -1,14 +1,14 @@
 function theta = InverseTransformation(in)
-% Inverse transformation ·´±ä»»·¨
-% ÈÎÃÈ 2021Äê3ÔÂ31ÈÕ
-% ÊäÈë£ºÄ©¶Ë×ø±êºÍÎ»×Ë
-% Êä³ö£ºÁù¸ö¹Ø½Ú½Ç
-%% ²ÎÊı£¬ÓÃµÄÊ±ºò¸Ä²ÎÊı£¬Õë¶ÔÅ¤×ª½ÇÌØ¶¨µÄÇé¿ö£¨²Î¼ûPUMA560²ÎÊı±í£©
+% Inverse transformation åå˜æ¢æ³•
+% MousikaR 2021å¹´3æœˆ31æ—¥
+% è¾“å…¥ï¼šæœ«ç«¯åæ ‡å’Œä½å§¿
+% è¾“å‡ºï¼šå…­ä¸ªå…³èŠ‚è§’
+%% å‚æ•°ï¼Œç”¨çš„æ—¶å€™æ”¹å‚æ•°ï¼Œé’ˆå¯¹æ‰­è½¬è§’ç‰¹å®šçš„æƒ…å†µï¼ˆå‚è§PUMA560å‚æ•°è¡¨ï¼‰
 a_1=0;a_2=431.8;a_3=20.32;
 alpha_1=-pi/2;alpha_2=0;alpha_3=-pi/2;
 d_2=149.09;d_3=0;d_4=433.07;
-%% ×¼±¸
-% ÒòÎªthetaÓĞ8×é½â£¬Òò´Ë·µ»ØÖµthetaÊÇÒ»¸öÔª°ûÊı×é
+%% å‡†å¤‡
+% å› ä¸ºthetaæœ‰8ç»„è§£ï¼Œå› æ­¤è¿”å›å€¼thetaæ˜¯ä¸€ä¸ªå…ƒèƒæ•°ç»„
 theta=cell(8,1);
 for i=1:8
     theta{i}=[0 0 0 0 0 0];
@@ -18,7 +18,7 @@ T06=diag([1 1 1 1]);
 T06(1:3,1:3)=R06;
 T06(1:3,4)=[in(1) in(2) in(3)];
 k=(in(1)^2+in(2)^2+in(3)^2-a_2^2-a_3^2-d_2^2-d_4^2)/(2*a_2);
-%% Çó½âtheta_1½Ç
+%% æ±‚è§£theta_1è§’
 theta_1=[atan2(in(2),in(1))-atan2(d_2,sqrt(in(1)^2+in(2)^2-d_2^2));
          atan2(in(2),in(1))-atan2(d_2,-sqrt(in(1)^2+in(2)^2-d_2^2))];
 for i=1:4
@@ -27,32 +27,32 @@ end
 for i=5:8
     theta{i}(1)=theta_1(2);
 end
-%% Çó½âtheta_3½Ç
+%% æ±‚è§£theta_3è§’
 theta_3=[atan2(a_3,d_4)-atan2(k,sqrt(a_3^2+d_4^2-k^2));
          atan2(a_3,d_4)-atan2(k,-sqrt(a_3^2+d_4^2-k^2));
     ];
 theta{1}(3)=theta_3(1);theta{2}(3)=theta_3(1);theta{3}(3)=theta_3(2);theta{4}(3)=theta_3(2);
 theta{5}(3)=theta_3(1);theta{6}(3)=theta_3(1);theta{7}(3)=theta_3(2);theta{8}(3)=theta_3(2);
-%% Çó½âtheta_2½Ç
+%% æ±‚è§£theta_2è§’
 theta23=zeros(6,1);
 for i=1:8
     theta23(i)=atan2((-a_3-a_2*cos(theta{i}(3)))*in(3)+(cos(theta{i}(1))*in(1)+sin(theta{i}(1))*in(2))*(a_2*sin(theta{i}(3))-d_4),(-d_4+a_2*sin(theta{i}(3)))*in(3)+(cos(theta{i}(1))*in(1)+sin(theta{i}(1))*in(2))*(a_2*cos(theta{i}(3))+a_3));
     theta{i}(2)=theta23(i)-theta{i}(3);
 end
-% %% Çó½âtheta_4
+% %% æ±‚è§£theta_4
 % for i=1:8
 %     theta{i}(4)=atan2(-T06(1,3)*sin(theta{i}(1))+T06(2,3)*cos(theta{i}(1)),-T06(1,3)*cos(theta{i}(1))*cos(theta23(i))-T06(2,3)*sin(theta{i}(1))*cos(theta23(i))+T06(3,3)*sin(theta23(i)));
 % end
-% %% Çó½âtheta_5
+% %% æ±‚è§£theta_5
 % for i=1:8
 %  theta{i}(5)=atan2(-T06(1,3)*(cos(theta{i}(1))*cos(theta23(i))*cos(theta{i}(4))+sin(theta{i}(1))*sin(theta{i}(4)))-T06(2,3)*(sin(theta{i}(1))*cos(theta23(i))*cos(theta{i}(4))-cos(theta{i}(1))*sin(theta{i}(4)))+T06(3,3)*sin(theta23(i))*cos(theta{i}(4)),-T06(1,3)*cos(theta{i}(1))*sin(theta23(i))-T06(2,3)*sin(theta{i}(1))*sin(theta23(i))-T06(3,3)*cos(theta23(i)));
 % end
-% %% Çó½âtheta_6
+% %% æ±‚è§£theta_6
 % for i=1:8
 %  theta{i}(6)=atan2(-T06(1,1)*(cos(theta{i}(1))*cos(theta23(i))*sin(theta{i}(4))-sin(theta{i}(1))*cos(theta{i}(4)))-T06(2,1)*(sin(theta{i}(1))*cos(theta23(i))*sin(theta{i}(4))+cos(theta{i}(1))*cos(theta{i}(4)))+T06(3,1)*sin(theta23(i))*sin(theta{i}(4)),T06(1,1)*((cos(theta{i}(1))*cos(theta23(i))*cos(theta{i}(4))+sin(theta{i}(1))*sin(theta{i}(4)))*cos(theta{i}(5))-cos(theta{i}(1))*sin(theta23(i))*sin(theta{i}(5)))+T06(2,1)*((sin(theta{i}(1))*cos(theta23(i))*cos(theta{i}(4))-cos(theta{i}(1))*sin(theta{i}(4)))*cos(theta{i}(5))-sin(theta{i}(1))*sin(theta23(i))*sin(theta{i}(5)))-T06(3,1)*(sin(theta23(i))*cos(theta{i}(4))*cos(theta{i}(5))+cos(theta23(i))*cos(theta{i}(5))));
 % end
 
-%% Å·À­½Ç·Ö½â·¨
+%% æ¬§æ‹‰è§’åˆ†è§£æ³•
 for i=1:8
     R_1_0=[cos(theta{i}(1)) -sin(theta{i}(1)) 0;
         sin(theta{i}(1)) cos(theta{i}(1)) 0;
@@ -68,7 +68,7 @@ for i=1:8
     R_3_0=R_1_0*R_2_1*R_3_2;
     R_6_0=rotz(in(4))*roty(in(5))*rotz(in(6));
     R_6_3=R_3_0\R_6_0;
-    % ÍÆµ¼¹ı³Ì¿´ÌÆÈğ´¾·¢µÄÍ¼Æ¬
+    % æ¨å¯¼è¿‡ç¨‹çœ‹å”ç‘æ·³å‘çš„å›¾ç‰‡
     theta{i}(5)=acos(R_6_3(2,3));
     if sin(theta{i}(5))~=0
         theta{i}(4)=atan2(R_6_3(3,3),-R_6_3(1,3));
@@ -79,7 +79,7 @@ for i=1:8
         theta{i}(6)=theta46;
     end
 end
-%% Íó²¿·­×ª
+%% è…•éƒ¨ç¿»è½¬
 for i=1:4
     theta{2*i}(4)=theta{2*i-1}(4)+pi;
     theta{2*i}(5)=-theta{2*i-1}(5);
