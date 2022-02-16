@@ -9,6 +9,7 @@ sklearn
 解析数据集  
 多分类逻辑回归  
 手写数字识别  
+识别go parking stop
 
 TensorFlow入门  
 
@@ -39,8 +40,16 @@ https://keras.io/api
 
 数据集网站：http://yann.lecun.com/exdb/mnist/
 
+4. 神经网络
+
 框图网站：http://alexlenail.me/NN-SVG/index.html
 
 [http://playground.tensorflow.org/](http://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.34480&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false)
 
 http://ais.uni-bonn.de/papers/icann2010_maxpool.pdf
+
+下载graphviz：https://graphviz.gitlab.io/download/
+
+卷积神经网络论文：https://aiatadams.files.wordpress.com/2016/02/bengio-lecun-20151207-deep-learning-tutorial-nips.pdf
+
+VGG16 深度卷积神经网络， 论文地址：https://arxiv.org/abs/1409.1556
